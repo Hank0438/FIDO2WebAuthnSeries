@@ -32,8 +32,6 @@
     </div>
 
     <script>
-        var x = document.getElementById("dataContainer")
-        alert(x.innerHTML)
         var makeCredsSample = () => {
             var challenge = new Uint8Array(32);
             window.crypto.getRandomValues(challenge);
@@ -65,19 +63,19 @@
             navigator.credentials.create({ 'publicKey': publicKey })
                 .then((newCredentialInfo) => {
                     alert('Open your browser console!')
-                    console.log('SUCCESS', newCredentialInfo)
-                    console.log('ClientDataJSON: ', bufferToString(newCredentialInfo.response.clientDataJSON))
+                    document.writeln('SUCCESS', newCredentialInfo)
+                    document.writeln('ClientDataJSON: ', bufferToString(newCredentialInfo.response.clientDataJSON))
                     let attestationObject = CBOR.decode(newCredentialInfo.response.attestationObject);
-                    console.log('AttestationObject: ', attestationObject)
+                    document.writeln('AttestationObject: ', attestationObject)
                     let authData = parseAuthData(attestationObject.authData);
-                    console.log('AuthData: ', authData);
-                    console.log('CredID: ', bufToHex(authData.credID));
-                    console.log('AAGUID: ', bufToHex(authData.aaguid));
-                    console.log('PublicKey', CBOR.decode(authData.COSEPublicKey.buffer));
+                    document.writeln('AuthData: ', authData);
+                    document.writeln('CredID: ', bufToHex(authData.credID));
+                    document.writeln('AAGUID: ', bufToHex(authData.aaguid));
+                    document.writeln('PublicKey', CBOR.decode(authData.COSEPublicKey.buffer));
                 })
                 .catch((error) => {
                     alert('Open your browser console!')
-                    console.log('FAIL', error)
+                    document.writeln('FAIL', error)
                 })
         }
     </script>

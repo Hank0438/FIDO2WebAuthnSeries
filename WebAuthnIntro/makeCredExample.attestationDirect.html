@@ -25,12 +25,14 @@
                 </div><!-- .card -->
             </div>
 
-            <div class="column col-4 text-center">            
+            <div class="column col-4 text-center" id="dataContainer">
+
             </div>
         </div>
     </div>
 
     <script>
+        $('#dataContainer').append("<p>123</p>")
         var makeCredsSample = () => {
             var challenge = new Uint8Array(32);
             window.crypto.getRandomValues(challenge);

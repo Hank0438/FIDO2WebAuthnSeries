@@ -25,8 +25,7 @@
                 </div><!-- .card -->
             </div>
 
-            <div class="column col-4 text-center" id="dataContainer">
-                123
+            <div class="column col-4 text-center">
             </div>
         </div>
     </div>
@@ -63,10 +62,12 @@
             navigator.credentials.create({ 'publicKey': publicKey })
                 .then((newCredentialInfo) => {
                     //alert('Open your browser console!')
-                    document.write('SUCCESS', newCredentialInfo)
+                    document.write('<p>SUCCESS</p>')
+                    document.write('<p>' + newCredentialInfo.id + '</p>')
+                    document.write('<p>' + newCredentialInfo.response.rawId + '</p>')
                     document.write('ClientDataJSON: ', bufferToString(newCredentialInfo.response.clientDataJSON))
                     let attestationObject = CBOR.decode(newCredentialInfo.response.attestationObject);
-                    document.write('AttestationObject: ', attestationObject)
+                    document.write('AttestationObject: ', attestationObject[0], attestationObject[1])
                     let authData = parseAuthData(attestationObject.authData);
                     document.write('AuthData: ', authData);
                     document.write('CredID: ', bufToHex(authData.credID));
@@ -75,10 +76,11 @@
                 })
                 .catch((error) => {
                     //alert('Open your browser console!')
-                    document.write('FAIL', error)
+                    document.write('<p>FAIL' + error + '</p>')
                 })
         }
     </script>
+    <script src="../lib/base64url-arraybuffer.js"></script>
     <script src="../lib/cbor.js"></script>
     <script src="../lib/helpers.js"></script>
 </body>

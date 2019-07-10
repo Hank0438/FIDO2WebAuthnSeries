@@ -63,19 +63,19 @@
             navigator.credentials.create({ 'publicKey': publicKey })
                 .then((newCredentialInfo) => {
                     //alert('Open your browser console!')
-                    document.writeln('SUCCESS', newCredentialInfo)
-                    document.writeln('ClientDataJSON: ', bufferToString(newCredentialInfo.response.clientDataJSON))
+                    document.write('SUCCESS', newCredentialInfo)
+                    document.write('ClientDataJSON: ', bufferToString(newCredentialInfo.response.clientDataJSON))
                     let attestationObject = CBOR.decode(newCredentialInfo.response.attestationObject);
-                    document.writeln('AttestationObject: ', attestationObject)
+                    document.write('AttestationObject: ', attestationObject)
                     let authData = parseAuthData(attestationObject.authData);
-                    document.writeln('AuthData: ', authData);
-                    document.writeln('CredID: ', bufToHex(authData.credID));
-                    document.writeln('AAGUID: ', bufToHex(authData.aaguid));
-                    document.writeln('PublicKey', CBOR.decode(authData.COSEPublicKey.buffer));
+                    document.write('AuthData: ', authData);
+                    document.write('CredID: ', bufToHex(authData.credID));
+                    document.write('AAGUID: ', bufToHex(authData.aaguid));
+                    document.write('PublicKey', CBOR.decode(authData.COSEPublicKey.buffer));
                 })
                 .catch((error) => {
                     //alert('Open your browser console!')
-                    document.writeln('FAIL', error)
+                    document.write('FAIL', error)
                 })
         }
     </script>

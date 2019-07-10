@@ -63,16 +63,16 @@
                 .then((newCredentialInfo) => {
                     //alert('Open your browser console!')
                     document.write('<p>SUCCESS</p>')
-                    document.write('<p>' + newCredentialInfo.id + '</p>')
-                    document.write('<p>' + newCredentialInfo.response.rawId + '</p>')
+                    document.write('id: ', newCredentialInfo.id)
+                    document.write('rawId: ', newCredentialInfo.response)
                     document.write('ClientDataJSON: ', bufferToString(newCredentialInfo.response.clientDataJSON))
-                    let attestationObject = CBOR.decode(newCredentialInfo.response.attestationObject);
-                    document.write('AttestationObject: ', attestationObject[0], attestationObject[1])
+                    let attestationObject = CBOR.decode(newCredentialInfo.response.attestationObject)[0];
+                    document.write('AttestationObject: ', attestationObject)
                     let authData = parseAuthData(attestationObject.authData);
                     document.write('AuthData: ', authData);
                     document.write('CredID: ', bufToHex(authData.credID));
                     document.write('AAGUID: ', bufToHex(authData.aaguid));
-                    document.write('PublicKey', CBOR.decode(authData.COSEPublicKey.buffer));
+                    document.write('PublicKey', CBOR.decode(authData.COSEPublicKey.buffer)[0]);
                 })
                 .catch((error) => {
                     //alert('Open your browser console!')
